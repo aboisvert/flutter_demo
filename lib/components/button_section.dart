@@ -6,25 +6,31 @@ import 'package:flutter_trainning/scopemodel/service_locator.dart';
 
 
 class ButtonSection extends StatelessWidget{
-
+  ScopedButtonSection scopedButtonSection=locator<ScopedButtonSection>();
 
   @override
   Widget build(BuildContext context) {
     Color color = Theme.of(context).primaryColor;
     return ScopedModel<ScopedButtonSection>(
-      model: locator<ScopedButtonSection>(),
-      child:Container(
-                child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    buildButtonColumn(()=>locator<ScopedButtonSection>().onClickCall(context),color, Icons.call, 'CALL'),
-                    buildButtonColumn(()=>locator<ScopedButtonSection>().onRouteClick(),color, Icons.near_me, 'ROUTE'),
-                    buildButtonColumn(()=>locator<ScopedButtonSection>().onClickCall(context),color, Icons.share, 'SHARE'),
-                  ],
-                ),
-      )
+        model: scopedButtonSection,
+        child:  ScopedModelDescendant<ScopedButtonSection>(
+            builder: (context, child, model) {
+              return Container(
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        buildButtonColumn(()=>scopedButtonSection.onClickCall(context),color, Icons.call, scopedButtonSection.textCall),
+                        buildButtonColumn(()=>scopedButtonSection.onClickRoute(context),color, Icons.near_me, 'ROUTE'),
+                        buildButtonColumn(()=>scopedButtonSection.onClickCall(context),color, Icons.share, 'SHARE'),
+                      ]
+                  )
+              );
+            }
+
+        )
     );
   }
+
 
 }
 

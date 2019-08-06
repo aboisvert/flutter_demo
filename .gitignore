@@ -2,3 +2,6 @@
 *.bin
 build
 
+
+\.idea/
+andoird/.gradle/
