@@ -20,8 +20,8 @@ class ScopedButtonSection extends Model {
   }
 
   void onClickRoute(BuildContext context){
-
-    //locator<ScopedTitleSection>().setTitle("You have click on Call");
+    ServiceLocator locator=ServiceLocator.getServiceLocator();
+    locator<ScopedTitleSection>().setTitle("You have click on Call");
 
   }
 

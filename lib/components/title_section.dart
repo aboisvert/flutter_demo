@@ -11,8 +11,10 @@ class TitleSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ServiceLocator locator=ServiceLocator.getServiceLocator();
+    ScopedTitleSection scopedTitleSection=locator<ScopedTitleSection>();
     return ScopedModel<ScopedTitleSection>(
-        model: locator<ScopedTitleSection>(),
+        model: scopedTitleSection,
         child: ScopedModelDescendant<ScopedTitleSection>(
             builder: (context, child, model) {
               return Container(
@@ -27,11 +29,16 @@ class TitleSection extends StatelessWidget {
                             /*2*/
                             Container(
                               padding: const EdgeInsets.only(bottom: 8),
-                              child: Text(
-                                '${model.titleModel.title}',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              child: new GestureDetector(
+                                onTap: () {
+                                  model.onClickTitle();
+                                },
+                                child: Text(
+                                  '${model.titleModel.title}',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
                               ),
                             ),
                             Text(
@@ -44,7 +51,7 @@ class TitleSection extends StatelessWidget {
                         ),
                       ),
                       /*3*/
-                      FavoriteWidget()
+                      //FavoriteWidget()
                     ],
                   ));
             }

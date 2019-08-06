@@ -16,7 +16,7 @@ class GingerApp extends StatefulWidget {
 }
 
 class GingerAppState extends State<GingerApp> {
-
+  ServiceLocator locator=ServiceLocator.getServiceLocator();
   @override
   Widget build(BuildContext context) {
     return new ScopedModel<ScopedGingerApp>(

@@ -6,11 +6,14 @@ import 'package:flutter_trainning/scopemodel/service_locator.dart';
 
 
 class ButtonSection extends StatelessWidget{
-  ScopedButtonSection scopedButtonSection=locator<ScopedButtonSection>();
+
+
 
   @override
   Widget build(BuildContext context) {
     Color color = Theme.of(context).primaryColor;
+    ServiceLocator locator=ServiceLocator.getServiceLocator();
+    ScopedButtonSection scopedButtonSection=locator<ScopedButtonSection>();
     return ScopedModel<ScopedButtonSection>(
         model: scopedButtonSection,
         child:  ScopedModelDescendant<ScopedButtonSection>(
@@ -30,7 +33,6 @@ class ButtonSection extends StatelessWidget{
         )
     );
   }
-
 
 }
 
