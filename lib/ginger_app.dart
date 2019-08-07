@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_trainning/scopemodel/scoped_title.dart';
 import 'components/title_section.dart';
 import 'components/button_section.dart';
 import 'components/text_section.dart';
@@ -16,7 +17,7 @@ class GingerApp extends StatefulWidget {
 }
 
 class GingerAppState extends State<GingerApp> {
-  ServiceLocator locator=ServiceLocator.getServiceLocator();
+  ServiceLocator locator = ServiceLocator.getServiceLocator();
   @override
   Widget build(BuildContext context) {
     return new ScopedModel<ScopedGingerApp>(
@@ -26,15 +27,18 @@ class GingerAppState extends State<GingerApp> {
                 decoration: new BoxDecoration(color: Colors.white),
                 child: ScopedModelDescendant<ScopedGingerApp>(
                     builder: (context, child, model) {
-                     return new ListView(children: <Widget>[
-                        Image.asset(
-                          model.urlImageHeader,
-                          fit: BoxFit.cover,
-                        ),
-                        TitleSection(),
-                        ButtonSection(),
-                        textSection
-                      ]);
+                      return new ScopedModel<ScopedTitleSection>(
+                        model: new ScopedTitleSection(),
+                        child: new ListView(children: <Widget>[
+                          Image.asset(
+                            model.urlImageHeader,
+                            fit: BoxFit.cover,
+                          ),
+                          TitleSection(),
+                          ButtonSection(),
+                          textSection
+                        ])
+                      );
                     }
                 )
             )

@@ -1,36 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_trainning/scopemodel/scoped_title.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter_trainning/scopemodel/scoped_button.dart';
-import 'package:flutter_trainning/scopemodel/service_locator.dart';
 
 
 class ButtonSection extends StatelessWidget{
 
-
-
   @override
   Widget build(BuildContext context) {
     Color color = Theme.of(context).primaryColor;
-    ServiceLocator locator=ServiceLocator.getServiceLocator();
-    ScopedButtonSection scopedButtonSection=locator<ScopedButtonSection>();
-    return ScopedModel<ScopedButtonSection>(
-        model: scopedButtonSection,
-        child:  ScopedModelDescendant<ScopedButtonSection>(
-            builder: (context, child, model) {
-              return Container(
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        buildButtonColumn(()=>scopedButtonSection.onClickCall(context),color, Icons.call, scopedButtonSection.textCall),
-                        buildButtonColumn(()=>scopedButtonSection.onClickRoute(context),color, Icons.near_me, 'ROUTE'),
-                        buildButtonColumn(()=>scopedButtonSection.onClickCall(context),color, Icons.share, 'SHARE'),
-                      ]
-                  )
-              );
-            }
-
-        )
+    return ScopedModelDescendant<ScopedTitleSection>(
+      builder: (context, child, titleSection) {
+        return ScopedModel<ScopedButtonSection>(
+          model: new ScopedButtonSection(titleSection),
+          child: ScopedModelDescendant<ScopedButtonSection>(
+              builder: (context, child, model) {
+                return Container(
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          buildButtonColumn(()=>model.onClickCall(context),color, Icons.call, model.textCall),
+                          buildButtonColumn(()=>model.onClickRoute(context),color, Icons.near_me, 'ROUTE'),
+                          buildButtonColumn(()=>model.onClickCall(context),color, Icons.share, 'SHARE'),
+                        ]
+                    )
+                );
+              }
+            )
+        );
+      }
     );
   }
 
