@@ -2,9 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 class ScopedGingerApp extends Model {
-  String urlImageHeader;
+  String urlImageHeader='images/lake.jpg';
   void onCall(BuildContext context,Model scopedModel,String action){
       showAlertDialog(context, action);
+  }
+
+  void changeUrlImage(String url){
+    urlImageHeader=url;
+    notifyListeners();
   }
 
   showAlertDialog(BuildContext context,String action) {

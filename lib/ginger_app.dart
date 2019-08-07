@@ -23,16 +23,22 @@ class GingerAppState extends State<GingerApp> {
         model: locator<ScopedGingerApp>(),
         child: new Scaffold(
             body: new Container(
-          decoration: new BoxDecoration(color: Colors.white),
-          child: new ListView(children: <Widget>[
-            Image.asset(
-              'images/lake.jpg',
-              fit: BoxFit.cover,
-            ),
-            TitleSection(),
-            ButtonSection(),
-            textSection
-          ]),
-        )));
+                decoration: new BoxDecoration(color: Colors.white),
+                child: ScopedModelDescendant<ScopedGingerApp>(
+                    builder: (context, child, model) {
+                     return new ListView(children: <Widget>[
+                        Image.asset(
+                          model.urlImageHeader,
+                          fit: BoxFit.cover,
+                        ),
+                        TitleSection(),
+                        ButtonSection(),
+                        textSection
+                      ]);
+                    }
+                )
+            )
+        )
+    );
   }
 }

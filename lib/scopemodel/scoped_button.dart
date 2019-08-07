@@ -21,8 +21,8 @@ class ScopedButtonSection extends Model {
 
   void onClickRoute(BuildContext context){
     ServiceLocator locator=ServiceLocator.getServiceLocator();
+//    locator<ScopedGingerApp>().changeUrlImage("");
     locator<ScopedTitleSection>().setTitle("You have click on Call");
-
   }
 
 }
